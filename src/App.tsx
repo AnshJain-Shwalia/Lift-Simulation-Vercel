@@ -1,7 +1,7 @@
-import { Box, Grid, GridItem, Heading } from "@chakra-ui/react";
+import { Box, Grid, GridItem } from "@chakra-ui/react";
 import InputBar from "./components/InputBar";
 import { useState } from "react";
-import LiftsContainer from "./components/LiftsContainer";
+import Controller from "./components/Controller";
 
 function App() {
     const [floors, setFloors] = useState(3);
@@ -19,7 +19,7 @@ function App() {
                 </Box>
             </GridItem>
             <GridItem area={"main"}>
-                <LiftsContainer floors={floors} lifts={lifts}></LiftsContainer>
+                <Controller floors={floors} lifts={lifts}></Controller>
             </GridItem>
         </Grid>
     );
