@@ -47,7 +47,7 @@ const InputBar = ({ setValues }: Props) => {
                 <NumberInput
                     defaultValue={3}
                     min={2}
-                    max={5}
+                    max={7}
                     variant={"filled"}
                 >
                     <NumberInputField ref={liftRef} />

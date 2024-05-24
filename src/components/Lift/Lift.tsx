@@ -1,4 +1,8 @@
 import { liftState } from "../Controller/Controller";
+import constants from "../../constants";
+import { Box } from "@chakra-ui/react";
+import Floor from "../Floor";
+import LiftBox from "../LiftBox";
 
 interface Props {
     liftS: liftState;
@@ -15,10 +19,18 @@ interface Props {
 // };
 
 const Lift = ({ liftS, floors }: Props) => {
+    const floorArray: number[] = new Array(floors).fill(0);
     return (
-        <div>
-            {JSON.stringify(liftS)} {floors}
-        </div>
+        <Box
+            position={"relative"}
+            height={(constants.floorHeight * floors).toString() + "px"}
+            width={constants.floorWidthInPx}
+        >
+            {floorArray.map((value, index) => {
+                return <Floor key={index} floorNumber={floors - index} />;
+            })}
+            <LiftBox liftS={liftS} floors={floors} />
+        </Box>
     );
 };
 

@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LiftContainer from "../LiftContainer";
+import MyComponent from "../tester/tester";
 
 interface Props {
     floors: number;
@@ -17,7 +18,7 @@ export type liftState = {
 // state=> 0> stationary 1> moving 2> opening and closing doors
 // movement=> 0> not moving in either direction 1> moving up -1> moving down
 // ohc=> 0> closed 1>opening 2> hold 3> closing
-// floor=> what floor the lift is on
+// floor=> what floor the lift is on, this can be b/w 1 and whatever the maximum floor is.
 // ohcSubState=> this represents the state of the doors of the lift,
 //               for every frame of the animation there is a state
 //               0-> closed and constants.liftOpeningFramesTotal-1 as closed,
@@ -36,7 +37,7 @@ export type liftState = {
 
 const generateLiftStates = (lifts: number): liftState[] => {
     const defaultLiftState: liftState = {
-        floor: 0,
+        floor: 1,
         state: 0,
         movement: 0,
         ohc: 0,
@@ -52,17 +53,16 @@ const generateLiftStates = (lifts: number): liftState[] => {
 
 const Controller = ({ floors, lifts }: Props) => {
     const [liftStates, setLiftStates] = useState(generateLiftStates(lifts));
-
     return (
         <>
             <div>
                 floors:{floors}, lifts{lifts}
             </div>
             <LiftContainer liftStates={liftStates} floors={floors} />
+            <MyComponent />
         </>
     );
 };
-
 export default Controller;
 
 // Reminders->
