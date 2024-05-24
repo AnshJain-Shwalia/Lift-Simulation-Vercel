@@ -14,6 +14,7 @@ export type liftState = {
     ohc: number;
     ohcSubState: number;
     movementSubState: number;
+    busy: boolean;
 };
 // state=> 0> stationary 1> moving 2> opening and closing doors
 // movement=> 0> not moving in either direction 1> moving up -1> moving down
@@ -43,6 +44,7 @@ const generateLiftStates = (lifts: number): liftState[] => {
         ohc: 0,
         ohcSubState: 0,
         movementSubState: 0,
+        busy: true,
     };
     let result: liftState[] = [];
     for (let i = 0; i < lifts; i++) {

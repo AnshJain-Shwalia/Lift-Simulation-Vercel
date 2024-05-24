@@ -2,7 +2,6 @@ import { Box, Grid, GridItem } from "@chakra-ui/react";
 import InputBar from "./components/InputBar";
 import { useState } from "react";
 import Controller from "./components/Controller";
-
 function App() {
     const [floors, setFloors] = useState(3);
     const [lifts, setLifts] = useState(3);
