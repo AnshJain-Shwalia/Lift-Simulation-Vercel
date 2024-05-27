@@ -1,21 +1,23 @@
 import { useEffect, useState } from "react";
 import LiftContainer from "../LiftContainer";
 import MyComponent from "../tester/tester";
+import ButtonsPanel from "../ButtonsPanel";
+import { Button, HStack } from "@chakra-ui/react";
 
 interface Props {
     floors: number;
     lifts: number;
 }
 
-export type liftState = {
-    floor: number;
-    state: number;
-    movement: number;
-    ohc: number;
-    ohcSubState: number;
-    movementSubState: number;
-    busy: boolean;
-};
+// export type liftState = {
+//     floor: number;
+//     state: number;
+//     movement: number;
+//     ohc: number;
+//     ohcSubState: number;
+//     movementSubState: number;
+//     busy: boolean;
+// };
 // state=> 0> stationary 1> moving 2> opening and closing doors
 // movement=> 0> not moving in either direction 1> moving up -1> moving down
 // ohc=> 0> closed 1>opening 2> hold 3> closing
@@ -36,38 +38,48 @@ export type liftState = {
 // pass these lift states to LiftContainer component to be displayed.
 // create
 
-const generateLiftStates = (lifts: number): liftState[] => {
-    const defaultLiftState: liftState = {
-        floor: 1,
-        state: 0,
-        movement: 0,
-        ohc: 0,
-        ohcSubState: 0,
-        movementSubState: 0,
-        busy: true,
-    };
-    let result: liftState[] = [];
-    for (let i = 0; i < lifts; i++) {
-        result.push(JSON.parse(JSON.stringify(defaultLiftState)) as liftState);
-    }
-    return result;
-};
+// const generateLiftStates = (lifts: number): liftState[] => {
+//     const defaultLiftState: liftState = {
+//         floor: 1,
+//         state: 0,
+//         movement: 0,
+//         ohc: 0,
+//         ohcSubState: 0,
+//         movementSubState: 0,
+//         busy: true,
+//     };
+//     let result: liftState[] = [];
+//     for (let i = 0; i < lifts; i++) {
+//         result.push(JSON.parse(JSON.stringify(defaultLiftState)) as liftState);
+//     }
+//     return result;
+// };
+
+// type liftState = {};
 
 const Controller = ({ floors, lifts }: Props) => {
-    const [liftStates, setLiftStates] = useState(generateLiftStates(lifts));
+    const [buttonPanelState, setButtonPanelState] = useState(
+        new Array(floors).fill([false, false]) as boolean[][]
+    );
+    console.log(buttonPanelState);
+    const updateButtonPanel = (floor: number, upDown: number) => {
+        setButtonPanelState((prevState: boolean[][]) => {
+            const newState = prevState.map((innerArray) => innerArray.slice());
+            newState[floor][upDown] = true;
+            console.log(newState);
+            return newState;
+        });
+    };
     return (
         <>
             <div>
                 floors:{floors}, lifts{lifts}
             </div>
-            <LiftContainer liftStates={liftStates} floors={floors} />
-            <MyComponent />
+            <HStack>
+                <ButtonsPanel floors={floors} />
+                <LiftContainer floors={floors} />
+            </HStack>
         </>
     );
 };
 export default Controller;
-
-// Reminders->
-// Before updating the states make sure to check if we are updating it to be the same value.
-//      if we are updating to the same value, then don't update.
-//      we can use JSON.stringify to compare.

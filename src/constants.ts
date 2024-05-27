@@ -1,6 +1,6 @@
-const liftOpeningTime = 1000;
-const liftHoldingTime = 1000;
-const liftPerFloorMovementTime = 2500;
+const liftOpeningTime = 300;
+const liftHoldingTime = 300;
+const liftPerFloorMovementTime = 1000;
 
 //
 const floorHeight = 120;
@@ -24,8 +24,12 @@ const constants = {
     liftHeightInPx: liftHeightInPx,
     liftWidth: liftWidth,
     liftWidthInPx: liftWidthInPx,
+    liftLeftOffSet: liftLeftOffSet,
     liftLeftOffSetInPx: liftLeftOffSetInPx,
     liftHeight: liftHeight,
+    liftPerFloorMovementTimeInSec: liftPerFloorMovementTime / 1000,
+    liftOpeningTime: liftOpeningTime / 1000,
+    liftHoldingTime: liftHoldingTime / 1000,
 };
 
 export default constants;

@@ -1,17 +1,34 @@
-import { Box, HStack } from "@chakra-ui/react";
-import { liftState } from "../Controller/Controller";
+import { Box, Button, HStack } from "@chakra-ui/react";
 import ButtonsPanel from "../ButtonsPanel";
+import Lift from "../Lift/Lift";
+import { useState } from "react";
 
 interface Props {
-    liftStates: liftState[];
     floors: number;
 }
 
-const LiftContainer = ({ liftStates, floors }: Props) => {
+const LiftContainer = ({ floors }: Props) => {
+    const [animation, setAnimation] = useState({
+        action: 0,
+        floor: 1,
+        subaction: 1,
+    });
     return (
-        <HStack>
-            <ButtonsPanel floors={floors} />
-        </HStack>
+        <>
+            {/* <Button
+                onClick={() => {
+                    setAnimation({ action: 1, floor: 1, subaction: 1 });
+                }}
+            /> */}
+            <HStack wrap={"wrap"}>
+                <Lift
+                    action={animation.action}
+                    floor={animation.floor}
+                    subaction={animation.subaction}
+                    totalFloors={floors}
+                />
+            </HStack>
+        </>
     );
 };
 
