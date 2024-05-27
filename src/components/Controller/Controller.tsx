@@ -65,7 +65,7 @@ const Controller = ({ floors, lifts }: Props) => {
     const updateButtonPanel = (floor: number, upDown: number) => {
         setButtonPanelState((prevState: boolean[][]) => {
             const newState = prevState.map((innerArray) => innerArray.slice());
-            newState[floor][upDown] = true;
+            newState[floor - 1][upDown] = true; // floor argument is 1-indexed.
             console.log(newState);
             return newState;
         });
@@ -76,7 +76,10 @@ const Controller = ({ floors, lifts }: Props) => {
                 floors:{floors}, lifts{lifts}
             </div>
             <HStack>
-                <ButtonsPanel floors={floors} />
+                <ButtonsPanel
+                    floors={floors}
+                    updateButtonPanel={updateButtonPanel}
+                />
                 <LiftContainer floors={floors} />
             </HStack>
         </>
