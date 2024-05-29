@@ -126,9 +126,11 @@ const calcReachabilityFactor = (floor: number, liftS: liftState) => {
 };
 
 const Controller = ({ floors, lifts }: Props) => {
-    const [buttonPanelState, setButtonPanelState] = useState(
-        new Array(floors).fill([false, false]) as boolean[][]
-    );
+    const [buttonPanelState, setButtonPanelState] = useState(() => {
+        let temp = new Array(floors).fill([false, false]) as boolean[][];
+        temp[0][1] = true;
+        return temp;
+    });
     const [liftStates, setLiftStates] = useState(
         generateDefaultLiftStates(lifts, floors)
     );
@@ -214,6 +216,20 @@ const Controller = ({ floors, lifts }: Props) => {
                     updateLiftState={updateLiftState}
                 />
             </HStack>
+            <Button
+                onClick={() => {
+                    console.log(liftStates);
+                }}
+            >
+                LiftStates
+            </Button>
+            <Button
+                onClick={() => {
+                    console.log(buttonPanelState);
+                }}
+            >
+                ButtonStateArray
+            </Button>
         </>
     );
 };

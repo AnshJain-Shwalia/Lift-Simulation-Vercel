@@ -12,7 +12,7 @@ interface Props {
 
 const LiftBox = React.memo(
     ({ action, floor, subaction, totalFloors, completionSignal }: Props) => {
-        console.log(action, floor, subaction, totalFloors);
+        console.log(action, subaction, floor, totalFloors);
         if (action === 0) {
             if (subaction === 0) {
                 // return a closed stationary lift at floor
@@ -140,7 +140,9 @@ const LiftBox = React.memo(
                         }}
                         transition={{ duration: 0 }}
                         onAnimationComplete={completionSignal}
-                    ></motion.div>
+                    >
+                        kazu Boy
+                    </motion.div>
                 );
             } else if (subaction === 1) {
                 // return a lift that is opening at the floor
