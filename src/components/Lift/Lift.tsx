@@ -6,11 +6,17 @@ interface Props {
     action: number;
     floor: number;
     subaction: number;
-    // signal: someFunction
+    completionSignal: () => void;
     totalFloors: number;
 }
 
-const Lift = ({ action, floor, subaction, totalFloors }: Props) => {
+const Lift = ({
+    action,
+    floor,
+    subaction,
+    totalFloors,
+    completionSignal,
+}: Props) => {
     return (
         <Box
             position={"relative"}
@@ -22,6 +28,7 @@ const Lift = ({ action, floor, subaction, totalFloors }: Props) => {
                 subaction={subaction}
                 floor={floor}
                 totalFloors={totalFloors}
+                completionSignal={completionSignal}
             />
         </Box>
     );

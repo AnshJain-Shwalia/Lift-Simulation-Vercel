@@ -28,8 +28,8 @@ const constants = {
     liftLeftOffSetInPx: liftLeftOffSetInPx,
     liftHeight: liftHeight,
     liftPerFloorMovementTimeInSec: liftPerFloorMovementTime / 1000,
-    liftOpeningTime: liftOpeningTime / 1000,
-    liftHoldingTime: liftHoldingTime / 1000,
+    liftOpeningTimeInSec: liftOpeningTime / 1000,
+    liftHoldingTimeInSec: liftHoldingTime / 1000,
 };
 
 export default constants;

@@ -1,34 +1,37 @@
-import { Box, Button, HStack } from "@chakra-ui/react";
-import ButtonsPanel from "../ButtonsPanel";
+import { HStack } from "@chakra-ui/react";
 import Lift from "../Lift/Lift";
 import { useState } from "react";
+import { liftState } from "../Controller/Controller";
+import { liftState2AR } from "./liftAnimationControl";
+import { signalReceiver } from "./signalReceiver";
 
 interface Props {
     floors: number;
+    liftStates: liftState[];
+    updateLiftState: (newLS: liftState, index: number) => void;
 }
 
-const LiftContainer = ({ floors }: Props) => {
-    const [animation, setAnimation] = useState({
-        action: 0,
-        floor: 1,
-        subaction: 1,
-    });
+const LiftContainer = ({ floors, liftStates, updateLiftState }: Props) => {
     return (
-        <>
-            {/* <Button
-                onClick={() => {
-                    setAnimation({ action: 1, floor: 1, subaction: 1 });
-                }}
-            /> */}
-            <HStack wrap={"wrap"}>
-                <Lift
-                    action={animation.action}
-                    floor={animation.floor}
-                    subaction={animation.subaction}
-                    totalFloors={floors}
-                />
-            </HStack>
-        </>
+        <HStack wrap={"wrap"}>
+            {liftStates.map((value, index) => {
+                let RA = liftState2AR(value);
+                return (
+                    <Lift
+                        action={RA.action}
+                        floor={RA.floor}
+                        subaction={RA.subaction}
+                        totalFloors={floors}
+                        completionSignal={() => {
+                            signalReceiver(value, (newLS: liftState) => {
+                                updateLiftState(newLS, index);
+                            });
+                        }}
+                        key={index}
+                    />
+                );
+            })}
+        </HStack>
     );
 };
 

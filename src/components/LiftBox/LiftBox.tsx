@@ -6,12 +6,12 @@ interface Props {
     action: number;
     floor: number;
     subaction: number;
-    // signal: someSortOfFunction;
+    completionSignal: () => void;
     totalFloors: number;
 }
 
 const LiftBox = React.memo(
-    ({ action, floor, subaction, totalFloors }: Props) => {
+    ({ action, floor, subaction, totalFloors, completionSignal }: Props) => {
         console.log(action, floor, subaction, totalFloors);
         if (action === 0) {
             if (subaction === 0) {
@@ -41,6 +41,7 @@ const LiftBox = React.memo(
                             position: "absolute",
                         }}
                         transition={{ duration: 0 }}
+                        onAnimationComplete={completionSignal}
                     ></motion.div>
                 );
             } else if (subaction === 1) {
@@ -73,6 +74,7 @@ const LiftBox = React.memo(
                             duration: constants.liftPerFloorMovementTimeInSec,
                             ease: "linear",
                         }}
+                        onAnimationComplete={completionSignal}
                     ></motion.div>
                 );
             } else {
@@ -105,6 +107,7 @@ const LiftBox = React.memo(
                             duration: constants.liftPerFloorMovementTimeInSec,
                             ease: "linear",
                         }}
+                        onAnimationComplete={completionSignal}
                     ></motion.div>
                 );
             }
@@ -136,6 +139,7 @@ const LiftBox = React.memo(
                             position: "absolute",
                         }}
                         transition={{ duration: 0 }}
+                        onAnimationComplete={completionSignal}
                     ></motion.div>
                 );
             } else if (subaction === 1) {
@@ -164,7 +168,10 @@ const LiftBox = React.memo(
                             left: constants.liftLeftOffSet,
                             position: "absolute",
                         }}
-                        transition={{ duration: constants.liftOpeningTime }}
+                        transition={{
+                            duration: constants.liftOpeningTimeInSec,
+                        }}
+                        onAnimationComplete={completionSignal}
                     ></motion.div>
                 );
             } else if (subaction === 2) {
@@ -193,10 +200,14 @@ const LiftBox = React.memo(
                             left: constants.liftLeftOffSet,
                             position: "absolute",
                         }}
-                        transition={{ duration: constants.liftHoldingTime }}
+                        transition={{
+                            duration: constants.liftHoldingTimeInSec,
+                        }}
                         onAnimationComplete={() => {
-                            setTimeout(() => {},
-                            constants.liftHoldingTime * 1000);
+                            setTimeout(
+                                completionSignal,
+                                constants.liftHoldingTimeInSec * 1000
+                            );
                         }}
                     ></motion.div>
                 );
@@ -226,10 +237,16 @@ const LiftBox = React.memo(
                             left: constants.liftLeftOffSet,
                             position: "absolute",
                         }}
-                        transition={{ duration: constants.liftOpeningTime }}
+                        transition={{
+                            duration: constants.liftOpeningTimeInSec,
+                        }}
+                        onAnimationComplete={completionSignal}
                     ></motion.div>
                 );
             }
+        } else {
+            console.log("Problem in LiftBox.tsx");
+            return <h1>Helo, worudo!</h1>;
         }
     }
 );
