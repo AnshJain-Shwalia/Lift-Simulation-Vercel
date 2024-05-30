@@ -1,6 +1,6 @@
-const liftOpeningTime = 300;
-const liftHoldingTime = 300;
-const liftPerFloorMovementTime = 450;
+const liftOpeningTime = 700;
+const liftHoldingTime = 700;
+const liftPerFloorMovementTime = 700;
 
 //
 const floorHeight = 120;
