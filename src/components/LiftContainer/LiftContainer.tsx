@@ -1,6 +1,5 @@
 import { HStack } from "@chakra-ui/react";
 import Lift from "../Lift/Lift";
-import { useState } from "react";
 import { liftState } from "../Controller/Controller";
 import { liftState2AR } from "./liftAnimationControl";
 import { signalReceiver } from "./signalReceiver";

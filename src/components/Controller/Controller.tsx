@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import LiftContainer from "../LiftContainer";
-import MyComponent from "../tester/tester";
 import ButtonsPanel from "../ButtonsPanel";
-import { Button, HStack } from "@chakra-ui/react";
+import { HStack } from "@chakra-ui/react";
 
 interface Props {
     floors: number;

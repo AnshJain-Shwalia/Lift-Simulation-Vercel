@@ -4,7 +4,7 @@ const liftPerFloorMovementTime = 450;
 
 //
 const floorHeight = 120;
-const floorHeightInPx = floorHeight.toString() + "px";
+//const floorHeightInPx = floorHeight.toString() + "px";
 const floorWidth = 120;
 const floorWidthInPx = floorWidth.toString() + "px";
 const floorBaseWidthInPx = floorWidthInPx;

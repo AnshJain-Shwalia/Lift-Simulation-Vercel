@@ -1,4 +1,4 @@
-import { Stack, VStack } from "@chakra-ui/react";
+import { Stack } from "@chakra-ui/react";
 import ButtonsPanelFloor from "./ButtonsPanelFloor";
 
 interface Props {
@@ -10,7 +10,7 @@ const ButtonsPanel = ({ floors, updateButtonPanel }: Props) => {
     const floorArr = new Array(floors).fill(0);
     return (
         <Stack spacing={0} direction={"column"} alignSelf={"start"}>
-            {floorArr.map((value, index) => {
+            {floorArr.map((_, index) => {
                 return (
                     <ButtonsPanelFloor
                         key={index}
