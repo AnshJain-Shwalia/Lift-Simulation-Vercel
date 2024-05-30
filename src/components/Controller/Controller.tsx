@@ -190,9 +190,11 @@ const Controller = ({ floors, lifts }: Props) => {
         }
     };
     assignLift();
+    console.log("the Button Panel State", buttonPanelState);
     // console.log(buttonPanelState);
     // console.log(liftStates);
     const updateLiftState = (newLiftState: liftState, index: number) => {
+        console.log("kazinga bazinga!");
         setLiftStates((prevState) => {
             let newState = JSON.parse(JSON.stringify(prevState)) as liftState[];
             newState[index] = newLiftState;

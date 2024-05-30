@@ -29,6 +29,7 @@ export const signalReceiver = (
             // lift is stationary and was stationary
             // check if there are any floors that need to be visited above and including that floor.
             //      if there are then change the state to state=0,movement=1,ohc=0,floor=same,perLiftButtonPanelState=same
+            console.log("this also happened.");
             for (let i = lS.floor; i < lS.perLiftButtonPanelState.length; i++) {
                 if (
                     lS.perLiftButtonPanelState[i][0] == true ||
@@ -40,6 +41,7 @@ export const signalReceiver = (
                     return;
                 }
             }
+            console.log("this also happened 2.");
             // check if there are any floors that need to be visited below.
             //      if there are then change the state to state=0,movement=-1,ohc=0,floor=same,pLBPS=same
             for (let i = lS.floor - 1; i >= 0; i--) {
@@ -53,6 +55,7 @@ export const signalReceiver = (
                     return;
                 }
             }
+            console.log("this also happened 3.");
             return;
         } else if (lS.movement === 1) {
             // lift is stationary, but was moving up.

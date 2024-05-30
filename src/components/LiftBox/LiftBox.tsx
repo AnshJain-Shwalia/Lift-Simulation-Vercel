@@ -42,7 +42,10 @@ const LiftBox = React.memo(
                         }}
                         transition={{ duration: 0 }}
                         onAnimationComplete={completionSignal}
-                    ></motion.div>
+                    >
+                        {" "}
+                        action:0 subaction:0
+                    </motion.div>
                 );
             } else if (subaction === 1) {
                 // return a lift that is moving up from the floor
@@ -75,7 +78,9 @@ const LiftBox = React.memo(
                             ease: "linear",
                         }}
                         onAnimationComplete={completionSignal}
-                    ></motion.div>
+                    >
+                        action:0 subaction:1
+                    </motion.div>
                 );
             } else {
                 // return a lift that is going down one level from floor
@@ -108,7 +113,9 @@ const LiftBox = React.memo(
                             ease: "linear",
                         }}
                         onAnimationComplete={completionSignal}
-                    ></motion.div>
+                    >
+                        action:0 subaction:else
+                    </motion.div>
                 );
             }
         } else if (action === 1) {
@@ -141,7 +148,7 @@ const LiftBox = React.memo(
                         transition={{ duration: 0 }}
                         onAnimationComplete={completionSignal}
                     >
-                        kazu Boy
+                        action:1 subaction:0
                     </motion.div>
                 );
             } else if (subaction === 1) {
@@ -174,7 +181,9 @@ const LiftBox = React.memo(
                             duration: constants.liftOpeningTimeInSec,
                         }}
                         onAnimationComplete={completionSignal}
-                    ></motion.div>
+                    >
+                        action:1 subaction:1
+                    </motion.div>
                 );
             } else if (subaction === 2) {
                 // return a lift that has open doors.
@@ -211,7 +220,9 @@ const LiftBox = React.memo(
                                 constants.liftHoldingTimeInSec * 1000
                             );
                         }}
-                    ></motion.div>
+                    >
+                        action:1 subaction:2
+                    </motion.div>
                 );
             } else {
                 // return a lift at floor that is closing.
@@ -243,7 +254,9 @@ const LiftBox = React.memo(
                             duration: constants.liftOpeningTimeInSec,
                         }}
                         onAnimationComplete={completionSignal}
-                    ></motion.div>
+                    >
+                        action:1 subaction:3/else
+                    </motion.div>
                 );
             }
         } else {
