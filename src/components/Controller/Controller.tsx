@@ -1,7 +1,8 @@
 import { useState } from "react";
 import LiftContainer from "../LiftContainer";
 import ButtonsPanel from "../ButtonsPanel";
-import { HStack } from "@chakra-ui/react";
+import { Button, HStack } from "@chakra-ui/react";
+import calculateReachabilityFactor from "./cRF";
 
 interface Props {
     floors: number;
@@ -63,6 +64,20 @@ export type liftState = {
     perLiftButtonPanelState: boolean[][];
 };
 
+const copyLS = (lS: liftState): liftState => {
+    return {
+        ...lS,
+        perLiftButtonPanelState: lS.perLiftButtonPanelState.map((value) => {
+            return [...value];
+        }),
+    };
+};
+
+const markLS = (lS: liftState, floor: number, up: boolean, down: boolean) => {
+    lS.perLiftButtonPanelState[floor] = [down, up];
+    return lS;
+};
+
 const generateDefaultLiftStates = (num: number, floors: number) => {
     return new Array(num).fill({
         state: 0,
@@ -74,54 +89,6 @@ const generateDefaultLiftStates = (num: number, floors: number) => {
             false,
         ]) as boolean[][],
     }) as liftState[];
-};
-
-const calcReachabilityFactor = (floor: number, liftS: liftState) => {
-    if (liftS.movement === 1) {
-        if (floor > liftS.floor) {
-            return Math.abs(floor - liftS.floor);
-        } else {
-            // find the highest floor that needs to be serviced by liftS.
-            let i: number = floor + 1;
-            let lastFloor: number = floor + 1;
-            while (i < liftS.perLiftButtonPanelState.length) {
-                if (
-                    liftS.perLiftButtonPanelState[i][1] === true ||
-                    liftS.perLiftButtonPanelState[i][0] === true
-                ) {
-                    lastFloor = i;
-                }
-                i += 1;
-            }
-            return (
-                Math.abs(lastFloor - liftS.floor) * 2 +
-                Math.abs(liftS.floor - floor)
-            );
-        }
-    } else if (liftS.movement === -1) {
-        if (floor < liftS.floor) {
-            return Math.abs(liftS.floor - floor);
-        } else {
-            // find the lowest floor that needs to be serviced by the liftS.
-            let i: number = floor - 1;
-            let lastFloor: number = floor - 1;
-            while (i >= 0) {
-                if (
-                    liftS.perLiftButtonPanelState[i][1] === true ||
-                    liftS.perLiftButtonPanelState[i][0] === true
-                ) {
-                    lastFloor = i;
-                }
-                i -= 1;
-            }
-            return (
-                Math.abs(lastFloor - liftS.floor) * 2 +
-                Math.abs(liftS.floor - floor)
-            );
-        }
-    } else {
-        return Math.abs(floor - liftS.floor);
-    }
 };
 
 const Controller = ({ floors, lifts }: Props) => {
@@ -155,9 +122,25 @@ const Controller = ({ floors, lifts }: Props) => {
                 buttonPanelState[i][1] == true
             ) {
                 let minLiftIndex = 0;
-                let minLiftRF = calcReachabilityFactor(i, liftStates[0]);
+                let minLiftRF = calculateReachabilityFactor(
+                    i,
+                    markLS(
+                        copyLS(liftStates[0]),
+                        i,
+                        buttonPanelState[i][1],
+                        buttonPanelState[i][0]
+                    )
+                );
                 for (let j = 1; j < lifts; j++) {
-                    let LiftRF = calcReachabilityFactor(i, liftStates[j]);
+                    let LiftRF = calculateReachabilityFactor(
+                        i,
+                        markLS(
+                            copyLS(liftStates[j]),
+                            i,
+                            buttonPanelState[i][1],
+                            buttonPanelState[i][0]
+                        )
+                    );
                     if (LiftRF < minLiftRF) {
                         minLiftIndex = j;
                         minLiftRF = LiftRF;
@@ -228,20 +211,20 @@ const Controller = ({ floors, lifts }: Props) => {
                     updateLiftState={updateLiftState}
                 />
             </HStack>
-            {/* <Button
+            <Button
                 onClick={() => {
                     console.log(liftStates);
                 }}
             >
                 LiftStates
-            </Button> */}
-            {/* <Button
+            </Button>
+            <Button
                 onClick={() => {
                     console.log(buttonPanelState);
                 }}
             >
                 ButtonStateArray
-            </Button> */}
+            </Button>
         </>
     );
 };
