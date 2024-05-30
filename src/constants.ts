@@ -15,6 +15,7 @@ const liftWidth = 80;
 const liftWidthInPx = liftWidth.toString() + "px";
 const liftLeftOffSet = (floorWidth - liftWidth) / 2;
 const liftLeftOffSetInPx = liftLeftOffSet.toString() + "px"; // (fw-lw)/2
+const liftColor = "gray";
 
 const constants = {
     floorHeight: floorHeight,
@@ -30,6 +31,7 @@ const constants = {
     liftPerFloorMovementTimeInSec: liftPerFloorMovementTime / 1000,
     liftOpeningTimeInSec: liftOpeningTime / 1000,
     liftHoldingTimeInSec: liftHoldingTime / 1000,
+    liftColor: liftColor,
 };
 
 export default constants;

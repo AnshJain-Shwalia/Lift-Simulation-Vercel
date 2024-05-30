@@ -20,7 +20,7 @@ const LiftBox = React.memo(
                         animate={{
                             height: constants.liftHeight,
                             width: constants.liftWidth,
-                            backgroundColor: "red",
+                            backgroundColor: constants.liftColor,
                             top:
                                 (totalFloors - floor + 1) *
                                     constants.floorHeight -
@@ -31,7 +31,7 @@ const LiftBox = React.memo(
                         initial={{
                             height: constants.liftHeight,
                             width: constants.liftWidth,
-                            backgroundColor: "red",
+                            backgroundColor: constants.liftColor,
                             top:
                                 (totalFloors - floor + 1) *
                                     constants.floorHeight -
@@ -50,7 +50,7 @@ const LiftBox = React.memo(
                         initial={{
                             height: constants.liftHeight,
                             width: constants.liftWidth,
-                            backgroundColor: "red",
+                            backgroundColor: constants.liftColor,
                             top:
                                 (totalFloors - floor + 1) *
                                     constants.floorHeight -
@@ -61,7 +61,7 @@ const LiftBox = React.memo(
                         animate={{
                             height: constants.liftHeight,
                             width: constants.liftWidth,
-                            backgroundColor: "red",
+                            backgroundColor: constants.liftColor,
                             top:
                                 (totalFloors - (floor + 1) + 1) *
                                     constants.floorHeight -
@@ -83,7 +83,7 @@ const LiftBox = React.memo(
                         initial={{
                             height: constants.liftHeight,
                             width: constants.liftWidth,
-                            backgroundColor: "red",
+                            backgroundColor: constants.liftColor,
                             top:
                                 (totalFloors - floor + 1) *
                                     constants.floorHeight -
@@ -94,7 +94,7 @@ const LiftBox = React.memo(
                         animate={{
                             height: constants.liftHeight,
                             width: constants.liftWidth,
-                            backgroundColor: "red",
+                            backgroundColor: constants.liftColor,
                             top:
                                 (totalFloors - (floor - 1) + 1) *
                                     constants.floorHeight -
@@ -118,7 +118,7 @@ const LiftBox = React.memo(
                         animate={{
                             height: constants.liftHeight,
                             width: constants.liftWidth,
-                            backgroundColor: "red",
+                            backgroundColor: constants.liftColor,
                             top:
                                 (totalFloors - floor + 1) *
                                     constants.floorHeight -
@@ -129,7 +129,7 @@ const LiftBox = React.memo(
                         initial={{
                             height: constants.liftHeight,
                             width: constants.liftWidth,
-                            backgroundColor: "red",
+                            backgroundColor: constants.liftColor,
                             top:
                                 (totalFloors - floor + 1) *
                                     constants.floorHeight -
@@ -148,7 +148,7 @@ const LiftBox = React.memo(
                         animate={{
                             height: constants.liftHeight,
                             width: 0,
-                            backgroundColor: "red",
+                            backgroundColor: constants.liftColor,
                             top:
                                 (totalFloors - floor + 1) *
                                     constants.floorHeight -
@@ -159,7 +159,7 @@ const LiftBox = React.memo(
                         initial={{
                             height: constants.liftHeight,
                             width: constants.liftWidth,
-                            backgroundColor: "red",
+                            backgroundColor: constants.liftColor,
                             top:
                                 (totalFloors - floor + 1) *
                                     constants.floorHeight -
@@ -180,7 +180,7 @@ const LiftBox = React.memo(
                         animate={{
                             height: constants.liftHeight,
                             width: 0,
-                            backgroundColor: "red",
+                            backgroundColor: constants.liftColor,
                             top:
                                 (totalFloors - floor + 1) *
                                     constants.floorHeight -
@@ -191,7 +191,7 @@ const LiftBox = React.memo(
                         initial={{
                             height: constants.liftHeight,
                             width: 0,
-                            backgroundColor: "red",
+                            backgroundColor: constants.liftColor,
                             top:
                                 (totalFloors - floor + 1) *
                                     constants.floorHeight -
@@ -217,7 +217,7 @@ const LiftBox = React.memo(
                         animate={{
                             height: constants.liftHeight,
                             width: constants.liftWidth,
-                            backgroundColor: "red",
+                            backgroundColor: constants.liftColor,
                             top:
                                 (totalFloors - floor + 1) *
                                     constants.floorHeight -
@@ -228,7 +228,7 @@ const LiftBox = React.memo(
                         initial={{
                             height: constants.liftHeight,
                             width: 0,
-                            backgroundColor: "red",
+                            backgroundColor: constants.liftColor,
                             top:
                                 (totalFloors - floor + 1) *
                                     constants.floorHeight -
