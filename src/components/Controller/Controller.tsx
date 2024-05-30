@@ -229,13 +229,13 @@ const Controller = ({ floors, lifts }: Props) => {
                     updateLiftState={updateLiftState}
                 />
             </HStack>
-            <Button
+            {/* <Button
                 onClick={() => {
                     console.log(liftStates);
                 }}
             >
                 LiftStates
-            </Button>
+            </Button> */}
             {/* <Button
                 onClick={() => {
                     console.log(buttonPanelState);
