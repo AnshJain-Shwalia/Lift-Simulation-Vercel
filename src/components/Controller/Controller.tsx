@@ -121,6 +121,7 @@ const calcReachabilityFactor = (floor: number, liftS: liftState) => {
             );
         }
     } else {
+        console.log(Math.abs(floor - liftS.floor));
         return Math.abs(floor - liftS.floor);
     }
 };
@@ -162,9 +163,11 @@ const Controller = ({ floors, lifts }: Props) => {
                     let LiftRF = calcReachabilityFactor(i, liftStates[j]);
                     if (LiftRF < minLiftRF) {
                         minLiftIndex = j;
-                        minLiftRF = j;
+                        minLiftRF = LiftRF;
                     }
                 }
+                console.log("minLiftIndex=>", minLiftIndex);
+                console.log("minLiftRf=>", minLiftRF);
                 if (buttonPanelState[i][0] == true) {
                     setLiftStates((prevState) => {
                         let newState = JSON.parse(
@@ -190,11 +193,7 @@ const Controller = ({ floors, lifts }: Props) => {
         }
     };
     assignLift();
-    console.log("the Button Panel State", buttonPanelState);
-    // console.log(buttonPanelState);
-    // console.log(liftStates);
     const updateLiftState = (newLiftState: liftState, index: number) => {
-        console.log("kazinga bazinga!");
         setLiftStates((prevState) => {
             let newState = JSON.parse(JSON.stringify(prevState)) as liftState[];
             newState[index] = newLiftState;
@@ -204,9 +203,9 @@ const Controller = ({ floors, lifts }: Props) => {
 
     return (
         <>
-            <div>
+            {/* <div>
                 floors:{floors}, lifts{lifts}
-            </div>
+            </div> */}
             <HStack>
                 <ButtonsPanel
                     floors={floors}
@@ -218,20 +217,20 @@ const Controller = ({ floors, lifts }: Props) => {
                     updateLiftState={updateLiftState}
                 />
             </HStack>
-            <Button
+            {/* <Button
                 onClick={() => {
                     console.log(liftStates);
                 }}
             >
                 LiftStates
-            </Button>
-            <Button
+            </Button> */}
+            {/* <Button
                 onClick={() => {
                     console.log(buttonPanelState);
                 }}
             >
                 ButtonStateArray
-            </Button>
+            </Button> */}
         </>
     );
 };

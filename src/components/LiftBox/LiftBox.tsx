@@ -12,7 +12,6 @@ interface Props {
 
 const LiftBox = React.memo(
     ({ action, floor, subaction, totalFloors, completionSignal }: Props) => {
-        console.log(action, subaction, floor, totalFloors);
         if (action === 0) {
             if (subaction === 0) {
                 // return a closed stationary lift at floor

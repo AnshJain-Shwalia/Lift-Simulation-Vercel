@@ -16,7 +16,9 @@ const LiftContainer = ({ floors, liftStates, updateLiftState }: Props) => {
         <HStack wrap={"wrap"}>
             {liftStates.map((value, index) => {
                 let RA = liftState2AR(value);
-
+                let newValue = { ...value, perLiftButtonPanelState: null };
+                let item =
+                    value.state === 0 ? value.perLiftButtonPanelState : null;
                 return (
                     <Lift
                         action={RA.action}
@@ -28,7 +30,11 @@ const LiftContainer = ({ floors, liftStates, updateLiftState }: Props) => {
                                 updateLiftState(newLS, index);
                             });
                         }}
-                        key={JSON.stringify(value) + JSON.stringify(index)}
+                        key={
+                            JSON.stringify(newValue) +
+                            JSON.stringify(index) +
+                            JSON.stringify(item)
+                        }
                     />
                 );
             })}

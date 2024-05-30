@@ -1,6 +1,6 @@
-const liftOpeningTime = 300;
-const liftHoldingTime = 300;
-const liftPerFloorMovementTime = 1000;
+const liftOpeningTime = 100;
+const liftHoldingTime = 100;
+const liftPerFloorMovementTime = 150;
 
 //
 const floorHeight = 120;
@@ -11,7 +11,7 @@ const floorBaseWidthInPx = floorWidthInPx;
 const floorMdWidthInPx = floorWidthInPx;
 const liftHeight = 100;
 const liftHeightInPx = liftHeight.toString() + "px";
-const liftWidth = 60;
+const liftWidth = 80;
 const liftWidthInPx = liftWidth.toString() + "px";
 const liftLeftOffSet = (floorWidth - liftWidth) / 2;
 const liftLeftOffSetInPx = liftLeftOffSet.toString() + "px"; // (fw-lw)/2

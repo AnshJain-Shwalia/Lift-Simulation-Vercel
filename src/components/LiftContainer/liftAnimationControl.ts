@@ -15,7 +15,6 @@ export const liftState2AR = (lS: liftState) => {
                 subaction: 0,
                 floor: lS.floor + 1,
             }; // lS.floor + 1 is because liftBox accepts floors as 1-indexed
-            console.log(1);
             return result;
         } else {
             let result: animationRequest = {
@@ -23,7 +22,6 @@ export const liftState2AR = (lS: liftState) => {
                 subaction: 0,
                 floor: lS.floor + 1,
             };
-            console.log(2);
             return result;
         }
     } else if (lS.state === 1) {

@@ -20,17 +20,30 @@ export const signalReceiver = (
     lS: liftState,
     updateState: (newLS: liftState) => void
 ): void => {
-    console.log("this is happening.");
     let lSCopy = JSON.parse(JSON.stringify(lS)) as liftState;
     // based on the state of the lift calculate the next state and set that next state
     if (lS.state === 0) {
         // lift is stationary.
         if (lS.movement === 0) {
             // lift is stationary and was stationary
-            // check if there are any floors that need to be visited above and including that floor.
+            // check if the current floor needs to be serviced.
+            if (
+                lS.perLiftButtonPanelState[lS.floor][1] == true ||
+                lS.perLiftButtonPanelState[lS.floor][0] == true
+            ) {
+                lSCopy.state = 2;
+                lSCopy.ohc = 0;
+                updateState(lSCopy);
+                return;
+            }
+
+            // check if there are any floors that need to be visited above the floor.
             //      if there are then change the state to state=0,movement=1,ohc=0,floor=same,perLiftButtonPanelState=same
-            console.log("this also happened.");
-            for (let i = lS.floor; i < lS.perLiftButtonPanelState.length; i++) {
+            for (
+                let i = lS.floor + 1;
+                i < lS.perLiftButtonPanelState.length;
+                i++
+            ) {
                 if (
                     lS.perLiftButtonPanelState[i][0] == true ||
                     lS.perLiftButtonPanelState[i][1] == true
@@ -41,7 +54,6 @@ export const signalReceiver = (
                     return;
                 }
             }
-            console.log("this also happened 2.");
             // check if there are any floors that need to be visited below.
             //      if there are then change the state to state=0,movement=-1,ohc=0,floor=same,pLBPS=same
             for (let i = lS.floor - 1; i >= 0; i--) {
@@ -55,7 +67,6 @@ export const signalReceiver = (
                     return;
                 }
             }
-            console.log("this also happened 3.");
             return;
         } else if (lS.movement === 1) {
             // lift is stationary, but was moving up.
