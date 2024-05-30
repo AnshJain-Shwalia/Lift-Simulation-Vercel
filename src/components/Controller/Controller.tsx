@@ -121,17 +121,14 @@ const calcReachabilityFactor = (floor: number, liftS: liftState) => {
             );
         }
     } else {
-        console.log(Math.abs(floor - liftS.floor));
         return Math.abs(floor - liftS.floor);
     }
 };
 
 const Controller = ({ floors, lifts }: Props) => {
-    const [buttonPanelState, setButtonPanelState] = useState(() => {
-        let temp = new Array(floors).fill([false, false]) as boolean[][];
-        temp[0][1] = true;
-        return temp;
-    });
+    const [buttonPanelState, setButtonPanelState] = useState(
+        new Array(floors).fill([false, false]) as boolean[][]
+    );
     const [liftStates, setLiftStates] = useState(
         generateDefaultLiftStates(lifts, floors)
     );
@@ -143,6 +140,7 @@ const Controller = ({ floors, lifts }: Props) => {
     }
 
     const updateButtonPanel = (floor: number, upDown: number) => {
+        console.log("button Panel Updated.");
         setButtonPanelState((prevState: boolean[][]) => {
             const newState = prevState.map((innerArray) => innerArray.slice());
             newState[floor - 1][upDown] = true; // floor argument is 1-indexed.
@@ -177,7 +175,14 @@ const Controller = ({ floors, lifts }: Props) => {
                             true;
                         return newState;
                     });
-                    buttonPanelState[i][0] = false;
+                    // buttonPanelState[i][0] = false;
+                    setButtonPanelState((prevState) => {
+                        let newState = JSON.parse(
+                            JSON.stringify(prevState)
+                        ) as boolean[][];
+                        newState[i][0] = false;
+                        return newState;
+                    });
                 } else {
                     setLiftStates((prevState) => {
                         let newState = JSON.parse(
@@ -187,7 +192,14 @@ const Controller = ({ floors, lifts }: Props) => {
                             true;
                         return newState;
                     });
-                    buttonPanelState[i][1] = false;
+                    // buttonPanelState[i][1] = false;
+                    setButtonPanelState((prevState) => {
+                        let newState = JSON.parse(
+                            JSON.stringify(prevState)
+                        ) as boolean[][];
+                        newState[i][1] = false;
+                        return newState;
+                    });
                 }
             }
         }
@@ -217,13 +229,13 @@ const Controller = ({ floors, lifts }: Props) => {
                     updateLiftState={updateLiftState}
                 />
             </HStack>
-            {/* <Button
+            <Button
                 onClick={() => {
                     console.log(liftStates);
                 }}
             >
                 LiftStates
-            </Button> */}
+            </Button>
             {/* <Button
                 onClick={() => {
                     console.log(buttonPanelState);
