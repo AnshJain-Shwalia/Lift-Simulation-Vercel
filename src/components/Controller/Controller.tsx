@@ -3,7 +3,6 @@ import LiftContainer from "../LiftContainer";
 import ButtonsPanel from "../ButtonsPanel";
 import { HStack } from "@chakra-ui/react";
 import calculateReachabilityFactor from "./cRF";
-import ScalableComponent from "../ScalableComponent";
 
 interface Props {
     floors: number;
