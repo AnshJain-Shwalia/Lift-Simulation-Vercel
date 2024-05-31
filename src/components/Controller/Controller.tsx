@@ -1,7 +1,7 @@
 import { useState } from "react";
 import LiftContainer from "../LiftContainer";
 import ButtonsPanel from "../ButtonsPanel";
-import { Button, HStack } from "@chakra-ui/react";
+import { HStack } from "@chakra-ui/react";
 import calculateReachabilityFactor from "./cRF";
 import ScalableComponent from "../ScalableComponent";
 
