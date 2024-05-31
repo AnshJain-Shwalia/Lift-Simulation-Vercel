@@ -36,7 +36,7 @@ const InputBar = ({ setValues }: Props) => {
                         variant={"filled"}
                         defaultValue={3}
                         min={2}
-                        max={7}
+                        max={100}
                     >
                         <NumberInputField ref={floorRef} />
                         <NumberInputStepper>
@@ -52,7 +52,7 @@ const InputBar = ({ setValues }: Props) => {
                     <NumberInput
                         defaultValue={3}
                         min={2}
-                        max={7}
+                        max={100}
                         variant={"filled"}
                     >
                         <NumberInputField ref={liftRef} />

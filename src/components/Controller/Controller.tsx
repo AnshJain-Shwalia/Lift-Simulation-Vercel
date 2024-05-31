@@ -201,19 +201,17 @@ const Controller = ({ floors, lifts }: Props) => {
             {/* <div>
                 floors:{floors}, lifts{lifts}
             </div> */}
-            <ScalableComponent>
-                <HStack>
-                    <ButtonsPanel
-                        floors={floors}
-                        updateButtonPanel={updateButtonPanel}
-                    />
-                    <LiftContainer
-                        floors={floors}
-                        liftStates={liftStates}
-                        updateLiftState={updateLiftState}
-                    />
-                </HStack>
-            </ScalableComponent>
+            <HStack overflowX={"auto"}>
+                <ButtonsPanel
+                    floors={floors}
+                    updateButtonPanel={updateButtonPanel}
+                />
+                <LiftContainer
+                    floors={floors}
+                    liftStates={liftStates}
+                    updateLiftState={updateLiftState}
+                />
+            </HStack>
             {/* <Button
                 onClick={() => {
                     console.log(liftStates);

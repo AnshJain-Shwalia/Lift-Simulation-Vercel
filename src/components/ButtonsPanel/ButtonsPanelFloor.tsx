@@ -10,7 +10,7 @@ interface Props {
 const ButtonsPanelFloor = ({ floorNumber, updateButtonPanel }: Props) => {
     return (
         <Box
-            // width={"100px"}
+            width={"70px"}
             height={constants.floorHeight}
             backgroundColor={"burlywood"}
         >
@@ -29,7 +29,12 @@ const ButtonsPanelFloor = ({ floorNumber, updateButtonPanel }: Props) => {
                 justifyContent="flex-end"
                 alignItems="center"
             >
-                <Text as={"b"} fontSize={"sm"} color={"black"}>
+                <Text
+                    as={"b"}
+                    fontSize={"sm"}
+                    color={"black"}
+                    overflow={"auto"}
+                >
                     Floor {floorNumber}
                 </Text>
             </Box>
