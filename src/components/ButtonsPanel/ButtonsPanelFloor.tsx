@@ -10,7 +10,7 @@ interface Props {
 const ButtonsPanelFloor = ({ floorNumber, updateButtonPanel }: Props) => {
     return (
         <Box
-            width={"100px"}
+            // width={"100px"}
             height={constants.floorHeight}
             backgroundColor={"burlywood"}
         >
@@ -22,8 +22,16 @@ const ButtonsPanelFloor = ({ floorNumber, updateButtonPanel }: Props) => {
                     }}
                 />
             </Box>
-            <Box height={"25%"} textAlign={"center"}>
-                <Text fontSize={"xs"}>floor {floorNumber}</Text>
+            <Box
+                height={"25%"}
+                display="flex"
+                flexDirection="column"
+                justifyContent="flex-end"
+                alignItems="center"
+            >
+                <Text as={"b"} fontSize={"sm"} color={"black"}>
+                    Floor {floorNumber}
+                </Text>
             </Box>
         </Box>
     );

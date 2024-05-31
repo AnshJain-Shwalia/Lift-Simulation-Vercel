@@ -26,39 +26,51 @@ const InputBar = ({ setValues }: Props) => {
     };
 
     return (
-        <Stack spacing={6} paddingY={5}>
-            <Stack>
-                <Heading size={"md"}>Number of Floors.</Heading>
-                <NumberInput
-                    variant={"filled"}
-                    defaultValue={3}
-                    min={2}
-                    max={7}
+        <>
+            <Stack spacing={6} paddingY={5}>
+                <Stack>
+                    <Heading size={{ base: "sm", md: "md" }}>
+                        Number of Floors.
+                    </Heading>
+                    <NumberInput
+                        variant={"filled"}
+                        defaultValue={3}
+                        min={2}
+                        max={7}
+                    >
+                        <NumberInputField ref={floorRef} />
+                        <NumberInputStepper>
+                            <NumberIncrementStepper />
+                            <NumberDecrementStepper />
+                        </NumberInputStepper>
+                    </NumberInput>
+                </Stack>
+                <Stack>
+                    <Heading size={{ base: "sm", md: "md" }}>
+                        Number of Lifts.
+                    </Heading>
+                    <NumberInput
+                        defaultValue={3}
+                        min={2}
+                        max={7}
+                        variant={"filled"}
+                    >
+                        <NumberInputField ref={liftRef} />
+                        <NumberInputStepper>
+                            <NumberIncrementStepper />
+                            <NumberDecrementStepper />
+                        </NumberInputStepper>
+                    </NumberInput>
+                </Stack>
+                <Button
+                    width={{ base: "50%", md: "100%" }}
+                    alignSelf={"center"}
+                    onClick={onClick}
                 >
-                    <NumberInputField ref={floorRef} />
-                    <NumberInputStepper>
-                        <NumberIncrementStepper />
-                        <NumberDecrementStepper />
-                    </NumberInputStepper>
-                </NumberInput>
+                    Submit
+                </Button>
             </Stack>
-            <Stack>
-                <Heading size={"md"}>Number of Lifts.</Heading>
-                <NumberInput
-                    defaultValue={3}
-                    min={2}
-                    max={7}
-                    variant={"filled"}
-                >
-                    <NumberInputField ref={liftRef} />
-                    <NumberInputStepper>
-                        <NumberIncrementStepper />
-                        <NumberDecrementStepper />
-                    </NumberInputStepper>
-                </NumberInput>
-            </Stack>
-            <Button onClick={onClick}>Submit</Button>
-        </Stack>
+        </>
     );
 };
 

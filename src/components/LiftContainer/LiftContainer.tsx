@@ -12,7 +12,7 @@ interface Props {
 
 const LiftContainer = ({ floors, liftStates, updateLiftState }: Props) => {
     return (
-        <HStack wrap={"wrap"}>
+        <HStack>
             {liftStates.map((value, index) => {
                 let RA = liftState2AR(value);
                 let newValue = { ...value, perLiftButtonPanelState: null };

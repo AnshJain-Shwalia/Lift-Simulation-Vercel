@@ -3,6 +3,7 @@ import LiftContainer from "../LiftContainer";
 import ButtonsPanel from "../ButtonsPanel";
 import { Button, HStack } from "@chakra-ui/react";
 import calculateReachabilityFactor from "./cRF";
+import ScalableComponent from "../ScalableComponent";
 
 interface Props {
     floors: number;
@@ -200,18 +201,20 @@ const Controller = ({ floors, lifts }: Props) => {
             {/* <div>
                 floors:{floors}, lifts{lifts}
             </div> */}
-            <HStack>
-                <ButtonsPanel
-                    floors={floors}
-                    updateButtonPanel={updateButtonPanel}
-                />
-                <LiftContainer
-                    floors={floors}
-                    liftStates={liftStates}
-                    updateLiftState={updateLiftState}
-                />
-            </HStack>
-            <Button
+            <ScalableComponent>
+                <HStack>
+                    <ButtonsPanel
+                        floors={floors}
+                        updateButtonPanel={updateButtonPanel}
+                    />
+                    <LiftContainer
+                        floors={floors}
+                        liftStates={liftStates}
+                        updateLiftState={updateLiftState}
+                    />
+                </HStack>
+            </ScalableComponent>
+            {/* <Button
                 onClick={() => {
                     console.log(liftStates);
                 }}
@@ -224,7 +227,7 @@ const Controller = ({ floors, lifts }: Props) => {
                 }}
             >
                 ButtonStateArray
-            </Button>
+            </Button> */}
         </>
     );
 };
