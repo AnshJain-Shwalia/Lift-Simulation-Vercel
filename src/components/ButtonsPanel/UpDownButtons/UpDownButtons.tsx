@@ -24,7 +24,7 @@ const UpDownButtons = ({ updateButtonPanel }: Props) => {
                 icon={<FaArrowCircleUp />}
                 height={"50%"}
                 size="lg"
-                colorScheme="black"
+                colorScheme="blackAlpha"
                 onClick={() => updateButtonPanel(1)}
             />
             <IconButton
@@ -32,7 +32,7 @@ const UpDownButtons = ({ updateButtonPanel }: Props) => {
                 icon={<FaArrowCircleDown />}
                 height={"50%"}
                 size="lg"
-                colorScheme="black"
+                colorScheme="blackAlpha"
                 onClick={() => updateButtonPanel(0)}
             />
         </Stack>
