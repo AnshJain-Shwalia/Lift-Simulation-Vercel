@@ -1,14 +1,17 @@
 import {
     Button,
     Heading,
+    Hide,
     NumberDecrementStepper,
     NumberIncrementStepper,
     NumberInput,
     NumberInputField,
     NumberInputStepper,
+    Show,
     Stack,
 } from "@chakra-ui/react";
 import { useRef } from "react";
+import InputBarMobile from "./InputBarMobile";
 
 interface Props {
     setValues: (floors: number, lifts: number) => void;
@@ -28,47 +31,52 @@ const InputBar = ({ setValues }: Props) => {
     return (
         <>
             <Stack spacing={6} paddingY={5}>
-                <Stack>
-                    <Heading size={{ base: "sm", md: "md" }}>
-                        Number of Floors.
-                    </Heading>
-                    <NumberInput
-                        variant={"filled"}
-                        defaultValue={3}
-                        min={2}
-                        max={100}
+                <Show above="md">
+                    <Stack>
+                        <Heading size={{ base: "sm", md: "md" }}>
+                            Number of Floors.
+                        </Heading>
+                        <NumberInput
+                            variant={"filled"}
+                            defaultValue={3}
+                            min={2}
+                            max={30}
+                        >
+                            <NumberInputField ref={floorRef} />
+                            <NumberInputStepper>
+                                <NumberIncrementStepper />
+                                <NumberDecrementStepper />
+                            </NumberInputStepper>
+                        </NumberInput>
+                    </Stack>
+                    <Stack>
+                        <Heading size={{ base: "sm", md: "md" }}>
+                            Number of Lifts.
+                        </Heading>
+                        <NumberInput
+                            defaultValue={3}
+                            min={2}
+                            max={11}
+                            variant={"filled"}
+                        >
+                            <NumberInputField ref={liftRef} />
+                            <NumberInputStepper>
+                                <NumberIncrementStepper />
+                                <NumberDecrementStepper />
+                            </NumberInputStepper>
+                        </NumberInput>
+                    </Stack>
+                    <Button
+                        width={{ base: "50%", md: "100%" }}
+                        alignSelf={"center"}
+                        onClick={onClick}
                     >
-                        <NumberInputField ref={floorRef} />
-                        <NumberInputStepper>
-                            <NumberIncrementStepper />
-                            <NumberDecrementStepper />
-                        </NumberInputStepper>
-                    </NumberInput>
-                </Stack>
-                <Stack>
-                    <Heading size={{ base: "sm", md: "md" }}>
-                        Number of Lifts.
-                    </Heading>
-                    <NumberInput
-                        defaultValue={3}
-                        min={2}
-                        max={100}
-                        variant={"filled"}
-                    >
-                        <NumberInputField ref={liftRef} />
-                        <NumberInputStepper>
-                            <NumberIncrementStepper />
-                            <NumberDecrementStepper />
-                        </NumberInputStepper>
-                    </NumberInput>
-                </Stack>
-                <Button
-                    width={{ base: "50%", md: "100%" }}
-                    alignSelf={"center"}
-                    onClick={onClick}
-                >
-                    Submit
-                </Button>
+                        Submit
+                    </Button>
+                </Show>
+                <Hide above="md">
+                    <InputBarMobile setValues={setValues} />
+                </Hide>
             </Stack>
         </>
     );
