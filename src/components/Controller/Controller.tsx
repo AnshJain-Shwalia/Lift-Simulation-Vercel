@@ -2,7 +2,7 @@ import { useState } from "react";
 import LiftContainer from "../LiftContainer";
 import ButtonsPanel from "../ButtonsPanel";
 import { HStack } from "@chakra-ui/react";
-import calculateReachabilityFactor from "./cRF";
+import cRF from "./cRF";
 
 interface Props {
     floors: number;
@@ -122,7 +122,7 @@ const Controller = ({ floors, lifts }: Props) => {
                 buttonPanelState[i][1] == true
             ) {
                 let minLiftIndex = 0;
-                let minLiftRF = calculateReachabilityFactor(
+                let minLiftRF = cRF(
                     i,
                     markLS(
                         copyLS(liftStates[0]),
@@ -132,7 +132,7 @@ const Controller = ({ floors, lifts }: Props) => {
                     )
                 );
                 for (let j = 1; j < lifts; j++) {
-                    let LiftRF = calculateReachabilityFactor(
+                    let LiftRF = cRF(
                         i,
                         markLS(
                             copyLS(liftStates[j]),
