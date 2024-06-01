@@ -2,6 +2,7 @@ import constants from "../../constants";
 import { liftState } from "./Controller";
 
 const cRF = (floor: number, lS: liftState): number => {
+    console.log("test");
     return calculateReachabilityFactorByDistToCover(floor, lS);
 };
 
@@ -351,10 +352,7 @@ const calculateReachabilityFactorByDistToCover = (
             // the lift has been opening and the state should be set to opened.
             lSCopy.state = 2;
             lSCopy.ohc = 2;
-            return (
-                calculateReachabilityFactorByDistToCover(floor, lSCopy) +
-                constants.liftOpeningTimeInSec
-            );
+            return calculateReachabilityFactorByDistToCover(floor, lSCopy) + 0;
         } else if (lS.ohc === 2) {
             // the lift has been opened for the liftOpenHoldTime and should start closing.
             lSCopy.state = 2;
