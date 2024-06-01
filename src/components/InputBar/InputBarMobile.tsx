@@ -69,7 +69,7 @@ const InputBarMobile = ({ setValues }: Props) => {
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.5 }}
                     >
-                        <Button onClick={onToggle}>Change Values.</Button>
+                        <Button onClick={onToggle}>Change Values</Button>
                     </motion.div>
                 )}
             </AnimatePresence>
@@ -87,25 +87,25 @@ const InputBarMobile = ({ setValues }: Props) => {
                             Number of Floors.
                         </Heading>
                         <HStack>
-                            <Button {...incf}>+</Button>
+                            <Button {...decf}>-</Button>
                             <Input
                                 {...inputf}
                                 fontWeight={"semibold"}
                                 ref={floorRef}
                             />
-                            <Button {...decf}>-</Button>
+                            <Button {...incf}>+</Button>
                         </HStack>
                         <Heading size={{ base: "sm", md: "md" }}>
                             Number of Lifts.
                         </Heading>
                         <HStack>
-                            <Button {...incl}>+</Button>
+                            <Button {...decl}>-</Button>
                             <Input
                                 {...inputl}
                                 fontWeight={"semibold"}
                                 ref={liftRef}
                             />
-                            <Button {...decl}>-</Button>
+                            <Button {...incl}>+</Button>
                         </HStack>
                         <Button
                             width={{ base: "50%", md: "100%" }}
