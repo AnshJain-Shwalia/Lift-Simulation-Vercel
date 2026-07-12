@@ -3,21 +3,18 @@ import constants from "../../constants";
 import LiftBox from "../LiftBox";
 
 interface Props {
-    action: number;
-    floor: number;
-    subaction: number;
-    completionSignal: () => void;
+    currentFloor: number;
+    doorState: "CLOSED" | "OPENING" | "OPEN" | "CLOSING";
+    direction: "UP" | "DOWN" | "IDLE";
     totalFloors: number;
 }
 
 const Lift = ({
-    action,
-    floor,
-    subaction,
+    currentFloor,
+    doorState,
+    direction,
     totalFloors,
-    completionSignal,
 }: Props) => {
-    // Array of size totalFloors to map out the horizontal floor markers
     const floorLines = Array.from({ length: totalFloors });
 
     return (
@@ -43,11 +40,10 @@ const Lift = ({
             ))}
 
             <LiftBox
-                action={action}
-                subaction={subaction}
-                floor={floor}
+                currentFloor={currentFloor}
+                doorState={doorState}
+                direction={direction}
                 totalFloors={totalFloors}
-                completionSignal={completionSignal}
             />
         </Box>
     );
