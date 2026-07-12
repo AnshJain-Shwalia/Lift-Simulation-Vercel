@@ -106,7 +106,7 @@ export const signalReceiver = (
             // lift is stationary, but was moving down.
             // check if the current floor needs to be serviced.
             //      if so then change the state to state=2,movement=-1,ohc=0,floor=same,pLBPS=same
-            if (lS.perLiftButtonPanelState[lS.floor][1] == true) {
+            if (lS.perLiftButtonPanelState[lS.floor][0] == true) {
                 lSCopy.state = 2;
                 lSCopy.ohc = 0;
                 updateState(lSCopy);

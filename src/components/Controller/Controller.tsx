@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import LiftContainer from "../LiftContainer";
 import ButtonsPanel from "../ButtonsPanel";
 import { HStack } from "@chakra-ui/react";
@@ -79,28 +79,28 @@ const markLS = (lS: liftState, floor: number, up: boolean, down: boolean) => {
 };
 
 const generateDefaultLiftStates = (num: number, floors: number) => {
-    return new Array(num).fill({
+    return Array.from({ length: num }, () => ({
         state: 0,
         movement: 0,
         ohc: 0,
         floor: 0,
-        perLiftButtonPanelState: new Array(floors).fill([
+        perLiftButtonPanelState: Array.from({ length: floors }, () => [
             false,
             false,
         ]) as boolean[][],
-    }) as liftState[];
+    })) as liftState[];
 };
 
 const Controller = ({ floors, lifts }: Props) => {
     const [buttonPanelState, setButtonPanelState] = useState(
-        new Array(floors).fill([false, false]) as boolean[][]
+        Array.from({ length: floors }, () => [false, false]) as boolean[][]
     );
     const [liftStates, setLiftStates] = useState(
         generateDefaultLiftStates(lifts, floors)
     );
     if (buttonPanelState.length != floors || liftStates.length != lifts) {
         setButtonPanelState(
-            new Array(floors).fill([false, false]) as boolean[][]
+            Array.from({ length: floors }, () => [false, false]) as boolean[][]
         );
         setLiftStates(generateDefaultLiftStates(lifts, floors));
     }
@@ -114,79 +114,81 @@ const Controller = ({ floors, lifts }: Props) => {
         });
     };
 
-    const assignLift = () => {
-        // from the buttonPanelState assign the buttonPresses to the lifts.
-        for (let i = 0; i < buttonPanelState.length; i++) {
-            if (
-                buttonPanelState[i][0] == true ||
-                buttonPanelState[i][1] == true
-            ) {
-                let minLiftIndex = 0;
-                let minLiftRF = cRF(
-                    i,
-                    markLS(
-                        copyLS(liftStates[0]),
-                        i,
-                        buttonPanelState[i][1],
-                        buttonPanelState[i][0]
-                    )
-                );
-                for (let j = 1; j < lifts; j++) {
-                    let LiftRF = cRF(
+    useEffect(() => {
+        const assignLift = () => {
+            // from the buttonPanelState assign the buttonPresses to the lifts.
+            for (let i = 0; i < buttonPanelState.length; i++) {
+                if (
+                    buttonPanelState[i][0] == true ||
+                    buttonPanelState[i][1] == true
+                ) {
+                    let minLiftIndex = 0;
+                    let minLiftRF = cRF(
                         i,
                         markLS(
-                            copyLS(liftStates[j]),
+                            copyLS(liftStates[0]),
                             i,
                             buttonPanelState[i][1],
                             buttonPanelState[i][0]
                         )
                     );
-                    if (LiftRF < minLiftRF) {
-                        minLiftIndex = j;
-                        minLiftRF = LiftRF;
+                    for (let j = 1; j < lifts; j++) {
+                        let LiftRF = cRF(
+                            i,
+                            markLS(
+                                copyLS(liftStates[j]),
+                                i,
+                                buttonPanelState[i][1],
+                                buttonPanelState[i][0]
+                            )
+                        );
+                        if (LiftRF < minLiftRF) {
+                            minLiftIndex = j;
+                            minLiftRF = LiftRF;
+                        }
+                    }
+                    console.log("minLiftIndex=>", minLiftIndex);
+                    console.log("minLiftRf=>", minLiftRF);
+                    if (buttonPanelState[i][0] == true) {
+                        setLiftStates((prevState) => {
+                            let newState = JSON.parse(
+                                JSON.stringify(prevState)
+                            ) as liftState[];
+                            newState[minLiftIndex].perLiftButtonPanelState[i][0] =
+                                true;
+                            return newState;
+                        });
+                        // buttonPanelState[i][0] = false;
+                        setButtonPanelState((prevState) => {
+                            let newState = JSON.parse(
+                                JSON.stringify(prevState)
+                            ) as boolean[][];
+                            newState[i][0] = false;
+                            return newState;
+                        });
+                    } else {
+                        setLiftStates((prevState) => {
+                            let newState = JSON.parse(
+                                JSON.stringify(prevState)
+                            ) as liftState[];
+                            newState[minLiftIndex].perLiftButtonPanelState[i][1] =
+                                true;
+                            return newState;
+                        });
+                        // buttonPanelState[i][1] = false;
+                        setButtonPanelState((prevState) => {
+                            let newState = JSON.parse(
+                                JSON.stringify(prevState)
+                            ) as boolean[][];
+                            newState[i][1] = false;
+                            return newState;
+                        });
                     }
                 }
-                console.log("minLiftIndex=>", minLiftIndex);
-                console.log("minLiftRf=>", minLiftRF);
-                if (buttonPanelState[i][0] == true) {
-                    setLiftStates((prevState) => {
-                        let newState = JSON.parse(
-                            JSON.stringify(prevState)
-                        ) as liftState[];
-                        newState[minLiftIndex].perLiftButtonPanelState[i][0] =
-                            true;
-                        return newState;
-                    });
-                    // buttonPanelState[i][0] = false;
-                    setButtonPanelState((prevState) => {
-                        let newState = JSON.parse(
-                            JSON.stringify(prevState)
-                        ) as boolean[][];
-                        newState[i][0] = false;
-                        return newState;
-                    });
-                } else {
-                    setLiftStates((prevState) => {
-                        let newState = JSON.parse(
-                            JSON.stringify(prevState)
-                        ) as liftState[];
-                        newState[minLiftIndex].perLiftButtonPanelState[i][1] =
-                            true;
-                        return newState;
-                    });
-                    // buttonPanelState[i][1] = false;
-                    setButtonPanelState((prevState) => {
-                        let newState = JSON.parse(
-                            JSON.stringify(prevState)
-                        ) as boolean[][];
-                        newState[i][1] = false;
-                        return newState;
-                    });
-                }
             }
-        }
-    };
-    assignLift();
+        };
+        assignLift();
+    }, [buttonPanelState, liftStates, lifts]);
     const updateLiftState = (newLiftState: liftState, index: number) => {
         setLiftStates((prevState) => {
             let newState = JSON.parse(JSON.stringify(prevState)) as liftState[];
@@ -203,6 +205,7 @@ const Controller = ({ floors, lifts }: Props) => {
             <HStack overflowX={"auto"}>
                 <ButtonsPanel
                     floors={floors}
+                    buttonPanelState={buttonPanelState}
                     updateButtonPanel={updateButtonPanel}
                 />
                 <LiftContainer

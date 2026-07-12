@@ -2,7 +2,6 @@ import constants from "../../constants";
 import { liftState } from "./Controller";
 
 const cRF = (floor: number, lS: liftState): number => {
-    console.log("test");
     return calculateReachabilityFactorByDistToCover(floor, lS);
 };
 
@@ -98,7 +97,7 @@ const calculateReachabilityFactorByTime = (
         } else {
             // lift is stationary, but was moving down.
             // check if the current floor needs to be serviced.
-            if (lS.perLiftButtonPanelState[lS.floor][1] == true) {
+            if (lS.perLiftButtonPanelState[lS.floor][0] == true) {
                 lSCopy.state = 2;
                 lSCopy.ohc = 0;
                 return calculateReachabilityFactorByTime(floor, lSCopy) + 0;
@@ -292,7 +291,7 @@ const calculateReachabilityFactorByDistToCover = (
         } else {
             // lift is stationary, but was moving down.
             // check if the current floor needs to be serviced.
-            if (lS.perLiftButtonPanelState[lS.floor][1] == true) {
+            if (lS.perLiftButtonPanelState[lS.floor][0] == true) {
                 lSCopy.state = 2;
                 lSCopy.ohc = 0;
                 return (
