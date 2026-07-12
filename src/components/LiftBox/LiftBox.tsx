@@ -59,18 +59,25 @@ const LiftBox = React.memo(
             }
         }
 
-        // Handle the door holding timeout
+        // Handle timeouts and immediate transitions for static states
         useEffect(() => {
             if (action === 1 && subaction === 2) {
+                // Open hold state - wait for hold time
                 const timer = setTimeout(() => {
                     completionSignal();
                 }, constants.liftHoldingTimeInSec * 1000);
                 return () => clearTimeout(timer);
+            } else if (
+                (action === 0 && subaction === 0) ||
+                (action === 1 && subaction === 0)
+            ) {
+                // Static states - complete immediately to trigger state checks
+                completionSignal();
             }
         }, [action, subaction, completionSignal]);
 
         const handleParentAnimationComplete = () => {
-            if (action === 0) {
+            if (action === 0 && (subaction === 1 || subaction === 2)) {
                 completionSignal();
             }
         };
